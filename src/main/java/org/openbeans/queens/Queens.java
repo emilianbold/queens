@@ -19,17 +19,25 @@ import java.util.function.Consumer;
 
 public class Queens {
 
-    private int n;
-    private Consumer<int[]> solution;
+    private final int n;
+    private final Consumer<int[]> solution;
 
+    /**
+     * Place N queens on an NxN chess board so that none of them attack each
+     * other (the classic n-queens problem). Additionally, make sure that
+     * no three queens are in a straight line at ANY angle.
+     *
+     * @param n number of queens
+     * @param solution consumer receiving the solution(s)
+     */
     public static void solve(int n, Consumer<int[]> solution) {
+        if (n <= 0) {
+            throw new IllegalStateException("Positive N expected");
+        }
         new Queens(n, solution).solve();
     }
 
     private Queens(int n, Consumer<int[]> solution) {
-        if (n <= 0) {
-            throw new IllegalStateException("Positive N expected");
-        }
         this.n = n;
         this.solution = solution;
     }
