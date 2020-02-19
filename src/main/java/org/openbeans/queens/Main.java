@@ -16,15 +16,23 @@
 package org.openbeans.queens;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class Main {
 
     public static void main(String[] args) {
-        for (int i = 1; i <= 18; i++) {
-            final int n = i;
-            Queens.solve(i, (q) -> {
-                System.out.println("For N = " + n + " found " + Arrays.toString(q));
-            });
+        Consumer<int[]> printer = (q) -> {
+            System.out.println("For N = " + q.length + " found " + Arrays.toString(q));
+        };
+        if (args.length == 0) {
+            for (int i = 1; i <= 8; i++) {
+                Queens.solve(i, printer);
+            }
+        } else {
+            for (String arg : args) {
+                int n = Integer.parseInt(arg);
+                Queens.solve(n, printer);
+            }
         }
     }
 
